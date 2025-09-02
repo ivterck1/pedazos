@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiesta con Efecto Parallax</title>
+    <title>Simpershym - Si no hay competencia no hay calidad</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,118 +14,130 @@
         }
         
         body {
-            overflow-x: hidden;
             background: #000;
             color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
         }
         
         .hero {
             position: relative;
-            height: 100vh;
+            height: 80vh;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
-            perspective: 100px;
         }
         
-        .parallax-layer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-position: center bottom;
-            background-repeat: no-repeat;
-            transition: transform 0.1s ease-out;
-            will-change: transform;
-        }
-        
-        .l1 { 
-            background-image: url("img/fondo.png");
-            background-size: cover;
-            background-position: center top;
-            z-index: 1;
-            transform: translateZ(-10px) scale(2);
-        }
-        
-        .l2 { 
-            background-image: url("img/hombreizquierdacapa1.png");
-            z-index: 2;
-            transform: translateZ(-8px) scale(1.8);
-            background-size: contain;
-            background-position: 20% bottom;
-        }
-        
-        .l3 { 
-            background-image: url("img/mujer-izquierda-capa2.png");
-            z-index: 3;
-            transform: translateZ(-6px) scale(1.6);
-            background-size: contain;
-            background-position: 25% bottom;
-        }
-        
-        .l4 { 
-            background-image: url("img/mujer1derechacapa1.png");
-            z-index: 4;
-            transform: translateZ(-8px) scale(1.8);
-            background-size: contain;
-            background-position: 80% bottom;
-        }
-        
-        .l5 { 
-            background-image: url("img/hombre1derechacapa2.png");
-            z-index: 5;
-            transform: translateZ(-6px) scale(1.6);
-            background-size: contain;
-            background-position: 75% bottom;
-        }
-        
-        .l6 { 
-            background-image: url("img/gentecapa3izquierda.png");
-            z-index: 6;
-            transform: translateZ(-4px) scale(1.4);
-            background-size: contain;
-            background-position: 15% bottom;
-        }
-        
-        .l7 { 
-            background-image: url("img/gentecapa3derecha.png");
-            z-index: 7;
-            transform: translateZ(-4px) scale(1.4);
-            background-size: contain;
-            background-position: 85% bottom;
-        }
-        
-        .l8 { 
-            background-image: url("img/logo.png");
-            z-index: 10;
-            transform: translateZ(0);
-            background-size: contain;
-            background-position: center 20%;
-            background-repeat: no-repeat;
-        }
-        
-        .content {
-            position: absolute;
-            bottom: 20%;
-            left: 0;
-            right: 0;
+        .logo {
             text-align: center;
-            z-index: 9;
-            color: white;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-        }
-        
-        .content h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-        
-        .content p {
-            font-size: 1.5rem;
             margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            z-index: 20;
+            position: relative;
+        }
+        
+        .logo h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: #ffcc00;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #ffffff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .image-grid {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .img-item {
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .img-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 204, 0, 0.3);
+            z-index: 15;
+        }
+        
+        .img-1 {
+            grid-column: 1 / 5;
+            grid-row: 1 / 4;
+            background-image: url("img/fondo.png");
+        }
+        
+        .img-2 {
+            grid-column: 1 / 4;
+            grid-row: 4 / 7;
+            background-image: url("img/hombreizquierdacapa1.png");
+        }
+        
+        .img-3 {
+            grid-column: 4 / 7;
+            grid-row: 4 / 7;
+            background-image: url("img/mujer-izquierda-capa2.png");
+        }
+        
+        .img-4 {
+            grid-column: 7 / 10;
+            grid-row: 1 / 4;
+            background-image: url("img/mujer1derechacapa1.png");
+        }
+        
+        .img-5 {
+            grid-column: 10 / 13;
+            grid-row: 1 / 4;
+            background-image: url("img/hombre1derechacapa2.png");
+        }
+        
+        .img-6 {
+            grid-column: 7 / 10;
+            grid-row: 4 / 7;
+            background-image: url("img/gentecapa3izquierda.png");
+        }
+        
+        .img-7 {
+            grid-column: 10 / 13;
+            grid-row: 4 / 7;
+            background-image: url("img/gentecapa3derecha.png");
+        }
+        
+        .cta-container {
+            text-align: center;
+            margin-top: 2rem;
+            z-index: 20;
+            position: relative;
         }
         
         .cta-button {
@@ -139,180 +151,195 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
         }
         
-        .lights {
+        .background-elements {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 8;
+            z-index: 1;
             pointer-events: none;
-            overflow: hidden;
         }
         
-        .light-beam {
+        .bg-element {
             position: absolute;
-            width: 150px;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
-            opacity: 0.3;
-            animation: light-sweep 8s infinite linear;
+            border-radius: 50%;
+            opacity: 0.6;
         }
         
-        .light-beam:nth-child(1) {
-            left: 10%;
-            animation-delay: 0s;
+        .bg-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #ff9900, transparent 70%);
+            top: 10%;
+            left: 5%;
+            animation: float 15s infinite ease-in-out;
         }
         
-        .light-beam:nth-child(2) {
-            left: 30%;
+        .bg-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #3366ff, transparent 70%);
+            top: 60%;
+            left: 80%;
+            animation: float 12s infinite ease-in-out reverse;
             animation-delay: 2s;
         }
         
-        .light-beam:nth-child(3) {
-            left: 50%;
-            animation-delay: 4s;
-        }
-        
-        .light-beam:nth-child(4) {
-            left: 70%;
-            animation-delay: 6s;
-        }
-        
-        .light-beam:nth-child(5) {
-            left: 90%;
+        .bg-element:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #ff3366, transparent 70%);
+            top: 70%;
+            left: 10%;
+            animation: float 18s infinite ease-in-out;
             animation-delay: 1s;
         }
         
-        @keyframes light-sweep {
-            0% {
-                transform: rotate(30deg) translateY(-100%);
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
             }
-            100% {
-                transform: rotate(30deg) translateY(200%);
+            25% {
+                transform: translateY(-20px) translateX(15px) rotate(5deg);
             }
-        }
-        
-        .people-animation {
-            animation: people-move 3s infinite ease-in-out alternate;
-        }
-        
-        @keyframes people-move {
-            0% {
-                transform: translateY(0) translateX(0);
+            50% {
+                transform: translateY(10px) translateX(-15px) rotate(-5deg);
             }
-            100% {
-                transform: translateY(-10px) translateX(5px);
+            75% {
+                transform: translateY(-10px) translateX(-10px) rotate(3deg);
             }
         }
         
-        /* Estilos para móviles */
+        @media (max-width: 992px) {
+            .image-grid {
+                height: 400px;
+                gap: 8px;
+            }
+            
+            .logo h1 {
+                font-size: 3.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.5rem;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .l1 { 
-                background-image: url("img/fondo-mobile.png");
+            .hero {
+                height: auto;
+                min-height: auto;
+                padding: 2rem 0;
             }
             
-            .l2 { 
-                background-image: url("img/hombreizquierdacapa1-mobile.png");
-                background-position: 10% bottom;
+            .image-grid {
+                height: 700px;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(7, 1fr);
+                gap: 10px;
+                margin: 2rem 0;
             }
             
-            .l3 { 
-                background-image: url("img/mujer-izquierda-capa2-mobile.png");
-                background-position: 15% bottom;
+            .img-1 {
+                grid-column: 1 / 3;
+                grid-row: 1 / 3;
             }
             
-            .l4 { 
-                background-image: url("img/mujer1derechacapa1-mobile.png");
-                background-position: 90% bottom;
+            .img-2 {
+                grid-column: 1 / 2;
+                grid-row: 3 / 5;
             }
             
-            .l5 { 
-                background-image: url("img/hombre1derechacapa2-mobile.png");
-                background-position: 85% bottom;
+            .img-3 {
+                grid-column: 2 / 3;
+                grid-row: 3 / 5;
             }
             
-            .l6 { 
-                background-image: url("img/gentecapa3izquierda-mobile.png");
-                background-position: 5% bottom;
+            .img-4 {
+                grid-column: 1 / 2;
+                grid-row: 5 / 7;
             }
             
-            .l7 { 
-                background-image: url("img/gentecapa3derecha-mobile.png");
-                background-position: 95% bottom;
+            .img-5 {
+                grid-column: 2 / 3;
+                grid-row: 5 / 7;
             }
             
-            .l8 { 
-                background-image: url("img/logo-mobile.png");
-                background-position: center 15%;
+            .img-6 {
+                grid-column: 1 / 2;
+                grid-row: 7 / 8;
             }
             
-            .content h1 {
+            .img-7 {
+                grid-column: 2 / 3;
+                grid-row: 7 / 8;
+            }
+            
+            .logo h1 {
                 font-size: 2.5rem;
             }
             
-            .content p {
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 2rem;
                 font-size: 1.1rem;
-                padding: 0 1rem;
             }
             
-            .parallax-layer {
-                background-size: cover;
-            }
-            
-            .l2, .l3, .l4, .l5, .l6, .l7 {
-                background-size: contain;
-            }
-        }
-        
-        /* Efecto de reducción de movimiento para usuarios que lo prefieren */
-        @media (prefers-reduced-motion: reduce) {
-            .parallax-layer, .light-beam {
-                animation: none;
-                transition: none;
+            .bg-element {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <section class="hero" id="hero">
-        <div class="parallax-layer l1"></div>
-        <div class="parallax-layer l2 people-animation"></div>
-        <div class="parallax-layer l3 people-animation" style="animation-delay: 0.5s"></div>
-        <div class="parallax-layer l4 people-animation" style="animation-delay: 0.7s"></div>
-        <div class="parallax-layer l5 people-animation" style="animation-delay: 0.3s"></div>
-        <div class="parallax-layer l6 people-animation" style="animation-delay: 0.9s"></div>
-        <div class="parallax-layer l7 people-animation" style="animation-delay: 0.6s"></div>
-        
-        <div class="lights">
-            <div class="light-beam"></div>
-            <div class="light-beam"></div>
-            <div class="light-beam"></div>
-            <div class="light-beam"></div>
-            <div class="light-beam"></div>
+    <div class="container">
+        <div class="hero">
+            <div class="background-elements">
+                <div class="bg-element"></div>
+                <div class="bg-element"></div>
+                <div class="bg-element"></div>
+            </div>
+            
+            <div class="logo">
+                <h1>Simpershym</h1>
+                <p class="tagline">Si no hay competencia no hay calidad</p>
+            </div>
+            
+            <div class="image-grid">
+                <div class="img-item img-1"></div>
+                <div class="img-item img-2"></div>
+                <div class="img-item img-3"></div>
+                <div class="img-item img-4"></div>
+                <div class="img-item img-5"></div>
+                <div class="img-item img-6"></div>
+                <div class="img-item img-7"></div>
+            </div>
+            
+            <div class="cta-container">
+                <a href="#" class="cta-button">Obtener Entradas</a>
+            </div>
         </div>
-        
-        <div class="parallax-layer l8"></div>
-        
-        <div class="content">
-                      <a href="#tickets" class="cta-button">Obtener Entradas</a>
-        </div>
-    </section>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const hero = document.getElementById('hero');
-            const layers = document.querySelectorAll('.parallax-layer');
+            const imgItems = document.querySelectorAll('.img-item');
             
-            // Efecto parallax al mover el ratón
-            hero.addEventListener('mousemove', function(e) {
+            // Efecto de movimiento con el ratón
+            document.querySelector('.hero').addEventListener('mousemove', function(e) {
                 const x = e.clientX;
                 const y = e.clientY;
                 const centerX = window.innerWidth / 2;
@@ -321,52 +348,18 @@
                 const moveX = (x - centerX) / centerX;
                 const moveY = (y - centerY) / centerY;
                 
-                layers.forEach(layer => {
-                    const depth = parseInt(layer.className.match(/l(\d)/)[1]);
-                    const offsetX = moveX * (10 - depth);
-                    const offsetY = moveY * (10 - depth);
+                imgItems.forEach((item, index) => {
+                    const depth = index + 1;
+                    const offsetX = moveX * depth * 2;
+                    const offsetY = moveY * depth * 2;
                     
-                    // Aplicar transformación manteniendo la escala original
-                    const currentTransform = window.getComputedStyle(layer).transform;
-                    const matrix = new DOMMatrixReadOnly(currentTransform);
-                    const currentTranslateZ = matrix.m43;
-                    
-                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) translateZ(${currentTranslateZ}px) scale(${2 - (depth * 0.2)})`;
+                    item.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
                 });
             });
             
-            // Efecto parallax al desplazar
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
-                
-                layers.forEach(layer => {
-                    const depth = parseInt(layer.className.match(/l(\d)/)[1]);
-                    layer.style.transform = `translateY(${rate * (depth/10)}px) ${layer.style.transform.split(' ').slice(1).join(' ')}`;
-                });
-            });
-            
-            // Efecto para dispositivos táctiles
-            hero.addEventListener('touchmove', function(e) {
-                const touch = e.touches[0];
-                const x = touch.clientX;
-                const y = touch.clientY;
-                const centerX = window.innerWidth / 2;
-                const centerY = window.innerHeight / 2;
-                
-                const moveX = (x - centerX) / centerX;
-                const moveY = (y - centerY) / centerY;
-                
-                layers.forEach(layer => {
-                    const depth = parseInt(layer.className.match(/l(\d)/)[1]);
-                    const offsetX = moveX * (5 - depth/2);
-                    const offsetY = moveY * (5 - depth/2);
-                    
-                    const currentTransform = window.getComputedStyle(layer).transform;
-                    const matrix = new DOMMatrixReadOnly(currentTransform);
-                    const currentTranslateZ = matrix.m43;
-                    
-                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) translateZ(${currentTranslateZ}px) scale(${2 - (depth * 0.2)})`;
+            document.querySelector('.hero').addEventListener('mouseleave', function() {
+                imgItems.forEach(item => {
+                    item.style.transform = '';
                 });
             });
         });
