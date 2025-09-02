@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diseño Elegante - Rojo, Negro, Oro y Blanco</title>
+    <title>Fiesta con Efecto Parallax</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,360 +14,363 @@
         }
         
         body {
-            background-color: #000000;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(179, 0, 0, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 80% 70%, rgba(179, 0, 0, 0.15) 0%, transparent 25%);
+            overflow-x: hidden;
+            background: #000;
+            color: white;
         }
         
-        .container {
-            max-width: 1200px;
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            perspective: 100px;
+        }
+        
+        .parallax-layer {
+            position: absolute;
             width: 100%;
+            height: 100%;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        
+        .l1 { 
+            background-image: url("img/fondo.png);
+            background-size: cover;
+            background-position: center top;
+            z-index: 1;
+            transform: translateZ(-10px) scale(2);
+        }
+        
+        .l2 { 
+            background-image: url("img/hombreizquierdacapa1.png");
+            z-index: 2;
+            transform: translateZ(-8px) scale(1.8);
+            background-size: contain;
+            background-position: 20% bottom;
+        }
+        
+        .l3 { 
+            background-image: url("img/mujer-izquierda-capa2.png");
+            z-index: 3;
+            transform: translateZ(-6px) scale(1.6);
+            background-size: contain;
+            background-position: 25% bottom;
+        }
+        
+        .l4 { 
+            background-image: url("img/mujer1derechacapa1.png");
+            z-index: 4;
+            transform: translateZ(-8px) scale(1.8);
+            background-size: contain;
+            background-position: 80% bottom;
+        }
+        
+        .l5 { 
+            background-image: url("img/hombre1derechacapa2.png");
+            z-index: 5;
+            transform: translateZ(-6px) scale(1.6);
+            background-size: contain;
+            background-position: 75% bottom;
+        }
+        
+        .l6 { 
+            background-image: url("img/gentecapa3izquierda.png");
+            z-index: 6;
+            transform: translateZ(-4px) scale(1.4);
+            background-size: contain;
+            background-position: 15% bottom;
+        }
+        
+        .l7 { 
+            background-image: url("img/gentecapa3derecha.png");
+            z-index: 7;
+            transform: translateZ(-4px) scale(1.4);
+            background-size: contain;
+            background-position: 85% bottom;
+        }
+        
+        .l8 { 
+            background-image: url("img/logo.png");
+            z-index: 10;
+            transform: translateZ(0);
+            background-size: contain;
+            background-position: center 20%;
+            background-repeat: no-repeat;
+        }
+        
+        .content {
+            position: absolute;
+            bottom: 20%;
+            left: 0;
+            right: 0;
             text-align: center;
+            z-index: 9;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
         }
         
-        .logo {
-            margin-bottom: 2rem;
-        }
-        
-        .logo h1 {
-            font-size: 4.5rem;
+        .content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
             font-weight: 800;
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
         
-        .logo .subtitle {
+        .content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #ff3366, #ff4b2b);
+            color: white;
+            padding: 1rem 2.5rem;
             font-size: 1.2rem;
-            color: #cccccc;
-            letter-spacing: 2px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
         
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 3rem 0;
-            padding: 3rem;
-            background: linear-gradient(145deg, rgba(179, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
-            border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
         }
         
-        .hero-section::before {
-            content: '';
+        .lights {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(45deg, transparent 48%, rgba(212, 175, 55, 0.1) 50%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(212, 175, 55, 0.1) 50%, transparent 52%);
-            background-size: 20px 20px;
-            z-index: 0;
-            opacity: 0.3;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(179, 0, 0, 0.5);
-        }
-        
-        .hero-content p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            max-width: 800px;
-            color: #e6e6e6;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(to right, #B30000, #800000);
-            color: #FFFFFF;
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(179, 0, 0, 0.4);
-            border: 2px solid #D4AF37;
-            position: relative;
+            z-index: 8;
+            pointer-events: none;
             overflow: hidden;
         }
         
-        .cta-button::before {
-            content: '';
+        .light-beam {
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, #FFD700, #D4AF37, #FFD700, #D4AF37);
-            z-index: -1;
-            border-radius: 60px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(179, 0, 0, 0.6);
-        }
-        
-        .cta-button:hover::before {
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
             opacity: 0.3;
+            animation: light-sweep 8s infinite linear;
         }
         
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
+        .light-beam:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
         }
         
-        .feature {
-            background: linear-gradient(145deg, rgba(179, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
-            padding: 2rem;
-            border-radius: 15px;
-            width: 250px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .light-beam:nth-child(2) {
+            left: 30%;
+            animation-delay: 2s;
         }
         
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(179, 0, 0, 0.3);
+        .light-beam:nth-child(3) {
+            left: 50%;
+            animation-delay: 4s;
         }
         
-        .feature i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #D4AF37;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        .light-beam:nth-child(4) {
+            left: 70%;
+            animation-delay: 6s;
         }
         
-        .feature h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #FFFFFF;
+        .light-beam:nth-child(5) {
+            left: 90%;
+            animation-delay: 1s;
         }
         
-        .feature p {
-            font-size: 1rem;
-            color: #cccccc;
+        @keyframes light-sweep {
+            0% {
+                transform: rotate(30deg) translateY(-100%);
+            }
+            100% {
+                transform: rotate(30deg) translateY(200%);
+            }
         }
         
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #D4AF37, transparent);
-            margin: 2rem 0;
+        .people-animation {
+            animation: people-move 3s infinite ease-in-out alternate;
         }
         
-        .testimonial {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: linear-gradient(145deg, rgba(179, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
-            border-radius: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            position: relative;
+        @keyframes people-move {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            100% {
+                transform: translateY(-10px) translateX(5px);
+            }
         }
         
-        .testimonial::before, .testimonial::after {
-            content: '"';
-            position: absolute;
-            font-size: 4rem;
-            color: #D4AF37;
-            opacity: 0.3;
-        }
-        
-        .testimonial::before {
-            top: 10px;
-            left: 20px;
-        }
-        
-        .testimonial::after {
-            bottom: 10px;
-            right: 20px;
-            transform: rotate(180deg);
-        }
-        
-        .testimonial p {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: #e6e6e6;
-            line-height: 1.6;
-        }
-        
-        .testimonial .author {
-            margin-top: 1rem;
-            font-weight: 600;
-            color: #D4AF37;
-        }
-        
-        footer {
-            margin-top: 3rem;
-            padding: 2rem;
-            color: #cccccc;
-            font-size: 0.9rem;
-        }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .social-icons a {
-            color: #D4AF37;
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-        
-        .social-icons a:hover {
-            color: #B30000;
-        }
-        
+        /* Estilos para móviles */
         @media (max-width: 768px) {
-            .logo h1 {
-                font-size: 3rem;
+            .l1 { 
+                background-image: url("img/fondo-mobile.png");
             }
             
-            .hero-content h2 {
-                font-size: 2rem;
+            .l2 { 
+                background-image: url("img/hombreizquierdacapa1-mobile.png");
+                background-position: 10% bottom;
             }
             
-            .hero-content p {
-                font-size: 1rem;
+            .l3 { 
+                background-image: url("img/mujer-izquierda-capa2-mobile.png");
+                background-position: 15% bottom;
             }
             
-            .features {
-                flex-direction: column;
-                align-items: center;
+            .l4 { 
+                background-image: url("img/mujer1derechacapa1-mobile.png");
+                background-position: 90% bottom;
             }
             
-            .feature {
-                width: 100%;
-                max-width: 350px;
+            .l5 { 
+                background-image: url("img/hombre1derechacapa2-mobile.png");
+                background-position: 85% bottom;
+            }
+            
+            .l6 { 
+                background-image: url("img/gentecapa3izquierda-mobile.png");
+                background-position: 5% bottom;
+            }
+            
+            .l7 { 
+                background-image: url("img/gentecapa3derecha-mobile.png");
+                background-position: 95% bottom;
+            }
+            
+            .l8 { 
+                background-image: url("img/logo-mobile.png");
+                background-position: center 15%;
+            }
+            
+            .content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            
+            .parallax-layer {
+                background-size: cover;
+            }
+            
+            .l2, .l3, .l4, .l5, .l6, .l7 {
+                background-size: contain;
+            }
+        }
+        
+        /* Efecto de reducción de movimiento para usuarios que lo prefieren */
+        @media (prefers-reduced-motion: reduce) {
+            .parallax-layer, .light-beam {
+                animation: none;
+                transition: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <h1>ELEGANCE</h1>
-            <div class="subtitle">ROJO • NEGRO • ORO • BLANCO</div>
+    <section class="hero" id="hero">
+        <div class="parallax-layer l1"></div>
+        <div class="parallax-layer l2 people-animation"></div>
+        <div class="parallax-layer l3 people-animation" style="animation-delay: 0.5s"></div>
+        <div class="parallax-layer l4 people-animation" style="animation-delay: 0.7s"></div>
+        <div class="parallax-layer l5 people-animation" style="animation-delay: 0.3s"></div>
+        <div class="parallax-layer l6 people-animation" style="animation-delay: 0.9s"></div>
+        <div class="parallax-layer l7 people-animation" style="animation-delay: 0.6s"></div>
+        
+        <div class="lights">
+            <div class="light-beam"></div>
+            <div class="light-beam"></div>
+            <div class="light-beam"></div>
+            <div class="light-beam"></div>
+            <div class="light-beam"></div>
         </div>
         
-        <div class="hero-section">
-            <div class="hero-content">
-                <h2>Diseño con Pasión y Elegancia</h2>
-                <p>Descubre la perfecta combinación de colores que transmite poder, lujo y sofisticación. El rojo que apasiona, el negro que impone, el oro que brilla y el blanco que pureza.</p>
-                <a href="#" class="cta-button">Explorar Colección</a>
-            </div>
+        <div class="parallax-layer l8"></div>
+        
+        <div class="content">
+            <h1>FIESTA INOLVIDABLE</h1>
+            <p>Únete a la celebración más esperada del año con música, baile y diversión</p>
+            <a href="#tickets" class="cta-button">Obtener Entradas</a>
         </div>
-        
-        <div class="features">
-            <div class="feature">
-                <i class="fas fa-gem"></i>
-                <h3>Calidad Premium</h3>
-                <p>Productos elaborados con los mejores materiales y atención al detalle.</p>
-            </div>
-            
-            <div class="feature">
-                <i class="fas fa-palette"></i>
-                <h3>Diseño Exclusivo</h3>
-                <p>Combinaciones cromáticas únicas que marcan la diferencia.</p>
-            </div>
-            
-            <div class="feature">
-                <i class="fas fa-crown"></i>
-                <h3>Elegancia Real</h3>
-                <p>Elementos que reflejan lujo y distinción en cada detalle.</p>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="testimonial">
-            <p>La combinación de rojo, negro, oro y blanco no es solo una paleta de colores, es una declaración de estilo y poder. Transmite confianza, elegancia y un toque de audacia que pocos pueden lograr.</p>
-            <div class="author">- María López, Diseñadora Principal</div>
-        </div>
-        
-        <footer>
-            <p>© 2023 Elegance Design. Todos los derechos reservados.</p>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-pinterest"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-            </div>
-        </footer>
-    </div>
+    </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const ctaButton = document.querySelector('.cta-button');
-            const features = document.querySelectorAll('.feature');
+            const hero = document.getElementById('hero');
+            const layers = document.querySelectorAll('.parallax-layer');
             
-            // Efecto de iluminación en el botón
-            ctaButton.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 8px 25px rgba(179, 0, 0, 0.7)';
-            });
-            
-            ctaButton.addEventListener('mouseleave', function() {
-                this.style.boxShadow = '0 5px 15px rgba(179, 0, 0, 0.4)';
-            });
-            
-            // Efectos para las tarjetas de características
-            features.forEach(feature => {
-                feature.addEventListener('mouseenter', function() {
-                    this.style.boxShadow = '0 12px 30px rgba(179, 0, 0, 0.4)';
-                });
+            // Efecto parallax al mover el ratón
+            hero.addEventListener('mousemove', function(e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
                 
-                feature.addEventListener('mouseleave', function() {
-                    this.style.boxShadow = '0 10px 25px rgba(179, 0, 0, 0.3)';
+                const moveX = (x - centerX) / centerX;
+                const moveY = (y - centerY) / centerY;
+                
+                layers.forEach(layer => {
+                    const depth = parseInt(layer.className.match(/l(\d)/)[1]);
+                    const offsetX = moveX * (10 - depth);
+                    const offsetY = moveY * (10 - depth);
+                    
+                    // Aplicar transformación manteniendo la escala original
+                    const currentTransform = window.getComputedStyle(layer).transform;
+                    const matrix = new DOMMatrixReadOnly(currentTransform);
+                    const currentTranslateZ = matrix.m43;
+                    
+                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) translateZ(${currentTranslateZ}px) scale(${2 - (depth * 0.2)})`;
                 });
             });
             
-            // Efecto de parpadeo sutil en el título
-            const logo = document.querySelector('.logo h1');
-            setInterval(() => {
-                logo.style.textShadow = '0 0 15px rgba(212, 175, 55, 0.5)';
-                setTimeout(() => {
-                    logo.style.textShadow = '0 0 15px rgba(212, 175, 55, 0.3)';
-                }, 500);
-            }, 3000);
+            // Efecto parallax al desplazar
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                
+                layers.forEach(layer => {
+                    const depth = parseInt(layer.className.match(/l(\d)/)[1]);
+                    layer.style.transform = `translateY(${rate * (depth/10)}px) ${layer.style.transform.split(' ').slice(1).join(' ')}`;
+                });
+            });
+            
+            // Efecto para dispositivos táctiles
+            hero.addEventListener('touchmove', function(e) {
+                const touch = e.touches[0];
+                const x = touch.clientX;
+                const y = touch.clientY;
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                const moveX = (x - centerX) / centerX;
+                const moveY = (y - centerY) / centerY;
+                
+                layers.forEach(layer => {
+                    const depth = parseInt(layer.className.match(/l(\d)/)[1]);
+                    const offsetX = moveX * (5 - depth/2);
+                    const offsetY = moveY * (5 - depth/2);
+                    
+                    const currentTransform = window.getComputedStyle(layer).transform;
+                    const matrix = new DOMMatrixReadOnly(currentTransform);
+                    const currentTranslateZ = matrix.m43;
+                    
+                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) translateZ(${currentTranslateZ}px) scale(${2 - (depth * 0.2)})`;
+                });
+            });
         });
     </script>
 </body>
