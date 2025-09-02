@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Leyenda del Dragón y el Caballero</title>
+    <title>Diseño Elegante - Rojo, Negro, Oro y Blanco</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,367 +14,360 @@
         }
         
         body {
-            overflow-x: hidden;
-            background: linear-gradient(to bottom, #1a237e, #0d47a1);
-            color: white;
+            background-color: #000000;
+            color: #ffffff;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 2rem;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(179, 0, 0, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(179, 0, 0, 0.15) 0%, transparent 25%);
         }
         
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
             text-align: center;
         }
         
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            color: #ffd740;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .logo {
+            margin-bottom: 2rem;
         }
         
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .logo h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
         
-        .story-container {
-            position: relative;
-            height: 600px;
-            margin: 2rem auto;
-            overflow: hidden;
+        .logo .subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            letter-spacing: 2px;
+        }
+        
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 3rem 0;
+            padding: 3rem;
+            background: linear-gradient(145deg, rgba(179, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
             border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            max-width: 1000px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
         }
         
-        .scene {
+        .hero-section::before {
+            content: '';
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .sky {
-            background: linear-gradient(to bottom, #0d47a1, #64b5f6);
-            z-index: 1;
-        }
-        
-        .mountains {
             background: 
-                linear-gradient(to bottom, transparent 60%, #4a148c 60.5%),
-                radial-gradient(ellipse at bottom, #4a148c 30%, transparent 70%);
+                linear-gradient(45deg, transparent 48%, rgba(212, 175, 55, 0.1) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(212, 175, 55, 0.1) 50%, transparent 52%);
+            background-size: 20px 20px;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
             z-index: 2;
-            animation: move-mountains 40s infinite linear;
         }
         
-        .castle {
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect x="50" y="50" width="100" height="100" fill="%23555" stroke="%23333" stroke-width="2"/><rect x="70" y="100" width="20" height="50" fill="%23755"/><rect x="110" y="100" width="20" height="50" fill="%23755"/><polygon points="50,50 150,50 100,20" fill="%23755"/><rect x="80" y="70" width="10" height="20" fill="%23ffd740"/><rect x="110" y="70" width="10" height="20" fill="%23ffd740"/></svg>') bottom center repeat-x;
-            background-size: 200px 150px;
-            z-index: 3;
-            animation: move-castle 30s infinite linear;
+        .hero-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(179, 0, 0, 0.5);
         }
         
-        .land {
-            background: 
-                linear-gradient(to top, #795548 10%, transparent 10.5%),
-                radial-gradient(ellipse at top, #5d4037 30%, transparent 70%);
-            z-index: 4;
-        }
-        
-        .characters {
-            z-index: 5;
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
-            padding-bottom: 50px;
-            height: 100%;
-        }
-        
-        .knight, .dragon {
-            position: relative;
-            animation: bounce 2s infinite ease-in-out;
-        }
-        
-        .knight {
-            width: 120px;
-            height: 180px;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="180" viewBox="0 0 120 180"><circle cx="60" cy="40" r="25" fill="%23aaa" stroke="%23777" stroke-width="2"/><rect x="45" y="65" width="30" height="50" fill="%23aaa" stroke="%23777" stroke-width="2"/><rect x="40" y="115" width="40" height="30" fill="%23755" stroke="%23555" stroke-width="2"/><path d="M30 65 L90 65 L85 45 L75 30 L65 20 L55 20 L45 30 L35 45 Z" fill="%23aaa" stroke="%23777" stroke-width="2"/><rect x="50" y="145" width="20" height="35" fill="%23755" stroke="%23555" stroke-width="2"/><path d="M20 80 L40 80 L35 100 L20 100 Z" fill="%23aaa" stroke="%23777" stroke-width="2"/><path d="M80 80 L100 80 L100 100 L85 100 Z" fill="%23aaa" stroke="%23777" stroke-width="2"/><path d="M55 0 L65 0 L65 20 L55 20 Z" fill="%23ffd740" stroke="%23ffab00" stroke-width="1"/></svg>') bottom center no-repeat;
-            animation-delay: 0.5s;
-        }
-        
-        .dragon {
-            width: 200px;
-            height: 180px;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="180" viewBox="0 0 200 180"><path d="M100 50 Q150 30 180 70 Q160 40 130 60 Q170 80 160 120 Q140 90 120 100 Q140 130 110 150 Q100 120 90 150 Q60 130 80 100 Q60 90 40 120 Q30 80 70 60 Q50 40 80 70 Q60 30 100 50 Z" fill="%23d32f2f" stroke="%23b71c1c" stroke-width="2"/><circle cx="160" cy="75" r="10" fill="%23ffd740"/><circle cx="165" cy="72" r="3" fill="%23000"/><path d="M180 70 Q190 60 195 65 Q190 75 180 70 Z" fill="%23d32f2f" stroke="%23b71c1c" stroke-width="1"/><path d="M160 120 Q170 140 155 145 Q150 130 160 120 Z" fill="%23d32f2f" stroke="%23b71c1c" stroke-width="1"/><path d="M140 90 Q130 70 135 55 Q145 70 140 90 Z" fill="%23d32f2f" stroke="%23b71c1c" stroke-width="1"/></svg>') bottom center no-repeat;
-        }
-        
-        .fire {
-            position: absolute;
-            top: 65px;
-            left: 50%;
-            transform: translateX(30px);
-            width: 40px;
-            height: 60px;
-            background: radial-gradient(ellipse, #ffd740 10%, #ffab00 30%, #ff5722 60%, transparent 70%);
-            border-radius: 50%;
-            opacity: 0;
-            animation: breathe-fire 5s infinite;
-            animation-delay: 2s;
-        }
-        
-        .story-text {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 1.5rem;
-            border-radius: 15px;
-            max-width: 800px;
-            margin: 2rem auto;
-            position: relative;
-            z-index: 10;
-            backdrop-filter: blur(5px);
-        }
-        
-        .story-text p {
+        .hero-content p {
             font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            color: #e6e6e6;
         }
         
-        .controls {
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #B30000, #800000);
+            color: #FFFFFF;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(179, 0, 0, 0.4);
+            border: 2px solid #D4AF37;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #FFD700, #D4AF37, #FFD700, #D4AF37);
+            z-index: -1;
+            border-radius: 60px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(179, 0, 0, 0.6);
+        }
+        
+        .cta-button:hover::before {
+            opacity: 0.3;
+        }
+        
+        .features {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
         }
         
-        button {
-            background: #ffd740;
-            color: #1a237e;
-            border: none;
-            padding: 0.8rem 1.5rem;
+        .feature {
+            background: linear-gradient(145deg, rgba(179, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+            padding: 2rem;
+            border-radius: 15px;
+            width: 250px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(179, 0, 0, 0.3);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #D4AF37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+        }
+        
+        .feature p {
             font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: #cccccc;
         }
         
-        button:hover {
-            background: #ffc400;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        @keyframes move-mountains {
-            0% { background-position: 0% 100%; }
-            100% { background-position: 100% 100%; }
-        }
-        
-        @keyframes move-castle {
-            0% { background-position: 0% 100%; }
-            100% { background-position: 200px 100%; }
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes breathe-fire {
-            0%, 95%, 100% { 
-                opacity: 0;
-                transform: translateX(30px) scale(0.5);
-            }
-            5%, 15% { 
-                opacity: 1;
-                transform: translateX(30px) scale(1.2);
-            }
-            20%, 90% { 
-                opacity: 0.8;
-                transform: translateX(80px) scale(1);
-            }
-        }
-        
-        .clouds {
-            position: absolute;
+        .divider {
             width: 100%;
-            height: 100%;
-            z-index: 2;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100"><path d="M20 50 Q0 30 20 20 Q30 0 50 20 Q70 0 90 20 Q100 0 120 20 Q140 0 160 20 Q180 30 160 50 Q170 70 150 70 Q140 90 120 80 Q100 100 90 80 Q70 100 50 80 Q30 90 20 70 Q10 70 20 50 Z" fill="%23ffffff" opacity="0.7"/></svg>') top repeat-x;
-            animation: move-clouds 60s infinite linear;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #D4AF37, transparent);
+            margin: 2rem 0;
         }
         
-        @keyframes move-clouds {
-            0% { background-position: 0% 50px; }
-            100% { background-position: 1000px 50px; }
+        .testimonial {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: linear-gradient(145deg, rgba(179, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+        
+        .testimonial::before, .testimonial::after {
+            content: '"';
+            position: absolute;
+            font-size: 4rem;
+            color: #D4AF37;
+            opacity: 0.3;
+        }
+        
+        .testimonial::before {
+            top: 10px;
+            left: 20px;
+        }
+        
+        .testimonial::after {
+            bottom: 10px;
+            right: 20px;
+            transform: rotate(180deg);
+        }
+        
+        .testimonial p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #e6e6e6;
+            line-height: 1.6;
+        }
+        
+        .testimonial .author {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #D4AF37;
+        }
+        
+        footer {
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: #D4AF37;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #B30000;
         }
         
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .logo h1 {
+                font-size: 3rem;
             }
             
-            .subtitle {
-                font-size: 1.2rem;
+            .hero-content h2 {
+                font-size: 2rem;
             }
             
-            .story-container {
-                height: 400px;
-            }
-            
-            .knight {
-                width: 80px;
-                height: 120px;
-                background-size: contain;
-            }
-            
-            .dragon {
-                width: 140px;
-                height: 126px;
-                background-size: contain;
-            }
-            
-            .story-text p {
+            .hero-content p {
                 font-size: 1rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                width: 100%;
+                max-width: 350px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>La Leyenda del Dragón y el Caballero</h1>
-        <p class="subtitle">Una historia de valor, fuego y honor en las tierras lejanas de Sirippers</p>
+        <div class="logo">
+            <h1>ELEGANCE</h1>
+            <div class="subtitle">ROJO • NEGRO • ORO • BLANCO</div>
+        </div>
         
-        <div class="story-container">
-            <div class="scene sky"></div>
-            <div class="scene clouds"></div>
-            <div class="scene mountains"></div>
-            <div class="scene castle"></div>
-            <div class="scene land"></div>
-            
-            <div class="characters">
-                <div class="knight"></div>
-                <div class="dragon">
-                    <div class="fire"></div>
-                </div>
+        <div class="hero-section">
+            <div class="hero-content">
+                <h2>Diseño con Pasión y Elegancia</h2>
+                <p>Descubre la perfecta combinación de colores que transmite poder, lujo y sofisticación. El rojo que apasiona, el negro que impone, el oro que brilla y el blanco que pureza.</p>
+                <a href="#" class="cta-button">Explorar Colección</a>
             </div>
         </div>
         
-        <div class="story-text">
-            <p>En el reino de Sirippers, donde la competencia da origen a la calidad, el valiente caballero Dorian se enfrenta al temible dragón Ignis.</p>
-            <p>Cuenta la leyenda que solo aquel que demuestra verdadera valentía y honor puede ganar el respeto del dragón y obtener la llama de la sabiduría.</p>
-            <p>¿Podrá el caballero superar los desafíos y demostrar que la auténtica calidad nace del esfuerzo y la competencia?</p>
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-gem"></i>
+                <h3>Calidad Premium</h3>
+                <p>Productos elaborados con los mejores materiales y atención al detalle.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-palette"></i>
+                <h3>Diseño Exclusivo</h3>
+                <p>Combinaciones cromáticas únicas que marcan la diferencia.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-crown"></i>
+                <h3>Elegancia Real</h3>
+                <p>Elementos que reflejan lujo y distinción en cada detalle.</p>
+            </div>
         </div>
         
-        <div class="controls">
-            <button id="pauseBtn">Pausar</button>
-            <button id="playBtn">Reproducir</button>
-            <button id="slowBtn">Cámara lenta</button>
-            <button id="fastBtn">Cámara rápida</button>
+        <div class="divider"></div>
+        
+        <div class="testimonial">
+            <p>La combinación de rojo, negro, oro y blanco no es solo una paleta de colores, es una declaración de estilo y poder. Transmite confianza, elegancia y un toque de audacia que pocos pueden lograr.</p>
+            <div class="author">- María López, Diseñadora Principal</div>
         </div>
+        
+        <footer>
+            <p>© 2023 Elegance Design. Todos los derechos reservados.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </footer>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const scenes = document.querySelectorAll('.scene');
-            const clouds = document.querySelector('.clouds');
-            const knight = document.querySelector('.knight');
-            const dragon = document.querySelector('.dragon');
-            const fire = document.querySelector('.fire');
-            const pauseBtn = document.getElementById('pauseBtn');
-            const playBtn = document.getElementById('playBtn');
-            const slowBtn = document.getElementById('slowBtn');
-            const fastBtn = document.getElementById('fastBtn');
+            const ctaButton = document.querySelector('.cta-button');
+            const features = document.querySelectorAll('.feature');
             
-            // Control de animación
-            pauseBtn.addEventListener('click', function() {
-                scenes.forEach(scene => {
-                    scene.style.animationPlayState = 'paused';
-                });
-                knight.style.animationPlayState = 'paused';
-                dragon.style.animationPlayState = 'paused';
-                fire.style.animationPlayState = 'paused';
+            // Efecto de iluminación en el botón
+            ctaButton.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 8px 25px rgba(179, 0, 0, 0.7)';
             });
             
-            playBtn.addEventListener('click', function() {
-                scenes.forEach(scene => {
-                    scene.style.animationPlayState = 'running';
-                });
-                knight.style.animationPlayState = 'running';
-                dragon.style.animationPlayState = 'running';
-                fire.style.animationPlayState = 'running';
+            ctaButton.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 5px 15px rgba(179, 0, 0, 0.4)';
             });
             
-            // Ajustar velocidad
-            slowBtn.addEventListener('click', function() {
-                scenes.forEach(scene => {
-                    const currentSpeed = parseFloat(getComputedStyle(scene).animationDuration);
-                    scene.style.animationDuration = (currentSpeed * 1.5) + 's';
+            // Efectos para las tarjetas de características
+            features.forEach(feature => {
+                feature.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 12px 30px rgba(179, 0, 0, 0.4)';
                 });
                 
-                const knightSpeed = parseFloat(getComputedStyle(knight).animationDuration);
-                knight.style.animationDuration = (knightSpeed * 1.5) + 's';
-                
-                const dragonSpeed = parseFloat(getComputedStyle(dragon).animationDuration);
-                dragon.style.animationDuration = (dragonSpeed * 1.5) + 's';
-                
-                const fireSpeed = parseFloat(getComputedStyle(fire).animationDuration);
-                fire.style.animationDuration = (fireSpeed * 1.5) + 's';
-            });
-            
-            fastBtn.addEventListener('click', function() {
-                scenes.forEach(scene => {
-                    const currentSpeed = parseFloat(getComputedStyle(scene).animationDuration);
-                    if (currentSpeed > 1) {
-                        scene.style.animationDuration = (currentSpeed * 0.7) + 's';
-                    }
+                feature.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '0 10px 25px rgba(179, 0, 0, 0.3)';
                 });
-                
-                const knightSpeed = parseFloat(getComputedStyle(knight).animationDuration);
-                if (knightSpeed > 0.5) {
-                    knight.style.animationDuration = (knightSpeed * 0.7) + 's';
-                }
-                
-                const dragonSpeed = parseFloat(getComputedStyle(dragon).animationDuration);
-                if (dragonSpeed > 0.5) {
-                    dragon.style.animationDuration = (dragonSpeed * 0.7) + 's';
-                }
-                
-                const fireSpeed = parseFloat(getComputedStyle(fire).animationDuration);
-                if (fireSpeed > 1) {
-                    fire.style.animationDuration = (fireSpeed * 0.7) + 's';
-                }
             });
             
-            // Efecto de movimiento con el ratón
-            const container = document.querySelector('.story-container');
-            container.addEventListener('mousemove', function(e) {
-                const x = e.clientX;
-                const centerX = window.innerWidth / 2;
-                const moveX = (x - centerX) / centerX;
-                
-                // Mover las nubes y montañas según la posición del ratón
-                clouds.style.transform = `translateX(${moveX * 20}px)`;
-                document.querySelector('.mountains').style.transform = `translateX(${moveX * 10}px)`;
-                document.querySelector('.castle').style.transform = `translateX(${moveX * 5}px)`;
-            });
-            
-            container.addEventListener('mouseleave', function() {
-                // Restaurar posición cuando el ratón sale
-                clouds.style.transform = '';
-                document.querySelector('.mountains').style.transform = '';
-                document.querySelector('.castle').style.transform = '';
-            });
+            // Efecto de parpadeo sutil en el título
+            const logo = document.querySelector('.logo h1');
+            setInterval(() => {
+                logo.style.textShadow = '0 0 15px rgba(212, 175, 55, 0.5)';
+                setTimeout(() => {
+                    logo.style.textShadow = '0 0 15px rgba(212, 175, 55, 0.3)';
+                }, 500);
+            }, 3000);
         });
     </script>
 </body>
