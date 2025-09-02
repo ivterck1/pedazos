@@ -1,927 +1,335 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Strippers H y M — Header con Humo Dorado</title>
-
-<!-- Fuentes -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lobster&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --negro:#000; --rojo:#8a0808; --dorado:#ffd700; --blanco:#fff;
-}
-
-/* Reset básico */
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--negro);color:var(--blanco);font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-
-/* ===================== HEADER FIJO ===================== */
-.header{
-  position:fixed; inset:0 0 auto 0; height:76px; z-index:100;
-  display:flex; align-items:center;
-  border-bottom:1px solid rgba(255,215,0,.18);
-  background:linear-gradient(180deg, rgba(0,0,0,.92), rgba(0,0,0,.70));
-  backdrop-filter:saturate(140%) blur(6px);
-  overflow:hidden; isolation:isolate;
-}
-
-/* Humo dorado animado (capas) */
-.header::before, .header::after{
-  content:""; position:absolute; inset:-60% -20% -40% -20%; pointer-events:none; z-index:-1;
-  filter: blur(24px) saturate(120%);
-  opacity:.45; mix-blend-mode:screen;
-}
-.header::before{
-  background:
-    radial-gradient(closest-side, rgba(255,215,0,.35), transparent 58%) 0% 50%/40% 80% no-repeat,
-    conic-gradient(from 200deg at 60% 40%, rgba(255,215,0,.25), transparent 35%, rgba(255,215,0,.25) 70%, transparent);
-  animation: humoA 14s linear infinite;
-}
-.header::after{
-  background:
-    radial-gradient(closest-side, rgba(255,215,0,.25), transparent 60%) 100% 50%/40% 80% no-repeat,
-    conic-gradient(from 40deg at 40% 60%, rgba(255,215,0,.18), transparent 30%, rgba(255,215,0,.18) 65%, transparent);
-  animation: humoB 18s linear infinite reverse;
-}
-
-@keyframes humoA{
-  0%{transform:translateX(-8%) translateY(-2%) scale(1)}
-  50%{transform:translateX(8%)  translateY(2%)  scale(1.05)}
-  100%{transform:translateX(-8%) translateY(-2%) scale(1)}
-}
-@keyframes humoB{
-  0%{transform:translateX(6%) translateY(4%) scale(1)}
-  50%{transform:translateX(-6%) translateY(-4%) scale(1.08)}
-  100%{transform:translateX(6%) translateY(4%) scale(1)}
-}
-
-/* Contenido del header */
-.nav{
-  max-width:1200px; margin:auto; width:100%;
-  display:flex; align-items:center; justify-content:space-between; padding:10px 16px;
-}
-.brand{display:flex; align-items:center; gap:10px}
-.brand .dot{
-  width:16px;height:16px;border-radius:50%; background:var(--dorado);
-  box-shadow:0 0 10px var(--dorado), 0 0 28px rgba(255,215,0,.55);
-}
-.brand h1{margin:0; font:700 20px/1 Lobster,cursive; letter-spacing:.6px}
-
-/* Menú desktop */
-.menu{display:flex; gap:22px; font-weight:800; letter-spacing:.4px}
-.menu a{
-  position:relative;
-  opacity:.92;
-  padding-bottom:10px; /* espacio para la raya dorada */
-}
-.menu a:hover{opacity:1; text-shadow:0 0 12px rgba(255,215,0,.6)}
-
-/* Línea dorada brillante bajo hover (desktop) */
-.menu a::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
-  background:linear-gradient(90deg,transparent,rgba(255,215,0,1),transparent);
-  box-shadow:0 0 8px rgba(255,215,0,.9), 0 0 14px rgba(255,215,0,.6);
-  transform:scaleX(0);
-  transform-origin:center;
-  transition:transform .25s ease;
-}
-.menu a:hover::after{ transform:scaleX(1); }
-
-.cta{
-  padding:10px 14px; border-radius:999px; font-weight:800;
-  border:1px solid rgba(255,215,0,.55);
-  background:linear-gradient(135deg,#b11212,var(--rojo));
-}
-
-/* Hamburguesa móvil */
-.burger{
-  display:none; width:38px;height:38px;border-radius:10px;
-  border:1px solid rgba(255,215,0,.35); background:rgba(255,215,0,.06);
-  position:relative;
-}
-.burger span, .burger::before, .burger::after{
-  content:""; position:absolute; left:8px; right:8px; height:2px; background:var(--blanco); border-radius:2px;
-}
-.burger span{top:18px}
-.burger::before{top:11px}
-.burger::after{top:25px}
-
-/* Panel móvil */
-.drawer{
-  position:fixed; inset:76px 0 auto 0; background:rgba(0,0,0,.96);
-  border-bottom:1px solid rgba(255,215,0,.18);
-  transform:translateY(-120%); transition:transform .25s ease; z-index:90;
-}
-.drawer.open{transform:translateY(0)}
-.drawer .links{display:grid; gap:14px; padding:16px}
-/* SIN bordes en móvil */
-.drawer a{
-  padding:12px 10px;
-  border:none !important;
-  border-radius:12px;
-  font-weight:800;
-}
-
-/* ===================== SECCIONES ===================== */
-main{padding-top:76px} /* evita que el header tape el contenido */
-
-section{position:relative}
-.wrap{max-width:1200px;margin:auto;padding:64px 18px}
-
-.section-title{
-  text-align:center; margin:0 0 10px;
-  font:700 clamp(24px,2.3vw,34px)/1 Lobster,cursive; letter-spacing:.6px
-}
-.section-sub{
-  text-align:center; margin:0 0 18px;
-  font:400 clamp(28px,3vw,44px)/1.05 "Great Vibes",cursive; color:#f7e8b0
-}
-.rule{
-  width:min(260px,50%); height:2px; margin:14px auto 28px;
-  background:linear-gradient(90deg,transparent,rgba(255,215,0,.95),transparent);
-  box-shadow:0 0 18px rgba(255,215,0,.35)
-}
-
-/* Presentación (hero de sección) */
-.hero{
-  min-height:68svh; display:grid; place-items:center; text-align:center; overflow:hidden;
-  background:
-    radial-gradient(1000px 280px at 75% 15%, rgba(255,215,0,.10), transparent 70%),
-    linear-gradient(180deg,#0a0a0a,#190303 55%,#0a0a0a);
-}
-.hero h3{
-  font:800 clamp(20px,2.2vw,32px)/1 Lobster,cursive; margin:0 0 12px;
-  background:linear-gradient(180deg,#fff,#f8e7a5 60%,var(--dorado));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.btn{
-  display:inline-block; padding:12px 18px; border-radius:999px; font-weight:800;
-  border:1px solid rgba(255,215,0,.55);
-  background:linear-gradient(135deg,#b11212,var(--rojo));
-}
-
-/* Hombres – grid placeholder con "glass" */
-.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
-.tile{
-  height:220px; border-radius:18px; position:relative; overflow:hidden;
-  background:
-    linear-gradient(180deg, rgba(255,215,0,.08), rgba(138,8,8,.28)),
-    linear-gradient(135deg, #0c0c0c, #141414);
-  border:1px solid rgba(255,215,0,.22);
-  box-shadow:0 10px 30px rgba(0,0,0,.45);
-}
-.badge{
-  position:absolute; top:12px; left:12px; padding:6px 10px; border-radius:999px;
-  background:var(--dorado); color:#111; font:800 12px/1 Poppins;
-}
-.caption{
-  position:absolute; bottom:12px; left:12px; right:12px;
-  font:700 18px/1.1 Lobster,cursive; text-shadow:0 0 10px #000;
-}
-
-/* Servicios – cards con halo dorado */
-.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
-.card{
-  padding:22px; border-radius:18px; background:linear-gradient(180deg,#0b0b0b,#141414);
-  border:1px solid rgba(255,215,0,.28); position:relative; overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.5);
-}
-.card::after{
-  content:""; position:absolute; inset:-2px; border-radius:18px; pointer-events:none;
-  background:conic-gradient(from 180deg, rgba(255,215,0,.0), rgba(255,215,0,.35), rgba(255,215,0,.0) 60%);
-  filter:blur(12px); opacity:.4; animation:spin 6s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-.card h4{margin:6px 0 8px; font:700 20px/1.15 Lobster,cursive}
-.card p{margin:0; color:#ddd}
-
-/* Mujeres – banda diagonal */
-.diagonal{
-  background:linear-gradient(180deg,#0a0a0a,#190303 60%,#0a0a0a);
-  clip-path:polygon(0 0,100% 6%,100% 100%,0 94%);
-}
-.panel{
-  height:240px; border-radius:22px; border:1px solid rgba(255,215,0,.28);
-  background:
-    linear-gradient(180deg, rgba(255,215,0,.06), rgba(138,8,8,.25)),
-    linear-gradient(135deg,#0e0e0e,#171717);
-  box-shadow:0 16px 36px rgba(0,0,0,.55);
-  display:grid; place-items:center; color:#eee; opacity:.92;
-}
-
-/* Videos – tiles 16:9 con botón play */
-.video-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px}
-.video{
-  aspect-ratio:16/9; border-radius:16px; border:1px solid rgba(255,215,0,.25);
-  background:
-    repeating-linear-gradient(135deg, rgba(255,215,0,.07) 0 10px, rgba(138,8,8,.2) 10px 20px),
-    linear-gradient(135deg,#0b0b0b,#151515);
-  display:grid; place-items:center; position:relative;
-}
-.play{
-  width:60px;height:60px;border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,#fff,#f9e9a0 60%,var(--dorado));
-  box-shadow:0 0 20px rgba(255,215,0,.6); position:relative;
-}
-.play::before{
-  content:""; border:solid transparent; border-width:10px 0 10px 16px; border-left-color:var(--rojo);
-  transform:translateX(3px);
-}
-
-/* Paquetes – pricing simple */
-.pricing{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
-.price{
-  padding:26px; border-radius:20px; border:1px solid rgba(255,215,0,.35);
-  background:linear-gradient(180deg,#0b0b0b,#141414); text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.55);
-}
-.price h5{margin:4px 0 6px; font:700 22px/1.1 Lobster,cursive}
-.amount{
-  font:800 34px/1 Poppins; margin:8px 0;
-  background:linear-gradient(180deg,#fff,#f7e6a2 60%,var(--dorado));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.price ul{list-style:none; margin:12px 0 0; padding:0; color:#e6e6e6}
-.price li{padding:6px 0; border-bottom:1px dashed rgba(255,215,0,.25)}
-
-/* ===================== FOOTER ===================== */
-.footer{
-  margin-top:30px;
-  background:linear-gradient(180deg,#0a0a0a,#111);
-  border-top:1px solid rgba(255,215,0,.25);
-}
-.footer-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
-  align-items:center;
-  padding:28px 18px 16px;
-}
-.social{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  justify-content:center;
-  padding:12px;
-  border:1px solid rgba(255,215,0,.25);
-  border-radius:14px;
-  background:linear-gradient(180deg,rgba(255,215,0,.05),rgba(255,215,0,.0));
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.social:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 22px rgba(0,0,0,.45), 0 0 22px rgba(255,215,0,.25) inset;
-}
-.social svg{width:22px;height:22px;filter:drop-shadow(0 0 6px rgba(255,215,0,.45))}
-.legal{
-  text-align:center;
-  color:#eaeaea;
-  padding:8px 18px 24px;
-  font-size:.95rem;
-}
-.legal .rule{
-  width:260px;height:2px;margin:12px auto 10px;
-}
-
-/* ===================== RESPONSIVO ===================== */
-@media (max-width: 960px){
-  .menu{display:none}
-  .burger{display:block}
-}
-@media (max-width: 700px){
-  .hero{min-height:64svh}
-  .wrap{padding:54px 16px}
-  .footer-grid{grid-template-columns:1fr}
-}
-@media (max-width: 420px){
-  .header{height:72px}
-  .nav{padding:8px 12px}
-  .brand h1{font-size:18px}
-  .cta{padding:9px 12px}
-  .tile{height:200px}
-  .panel{height:210px}
-}
-
-/* ===== Estilo MENÚ MÓVIL letra blanca + brillo dorado, sin bordes ===== */
-.drawer .links a {
-  font-size: 1.4rem;       /* más grandes */
-  font-weight: 800;
-  text-transform: uppercase;
-  text-align: center;
-
-  color: var(--blanco);    /* blanco solicitado */
-  /* Brillo dorado alrededor para conservar el estilo oro */
-  text-shadow:
-    0 0 6px rgba(255,215,0,0.55),
-    0 0 16px rgba(255,215,0,0.35);
-
-  transition: transform 0.2s ease, text-shadow 0.2s ease;
-}
-
-/* Subrayado dorado divertido al pasar en móvil */
-.drawer .links a::after{
-  content:""; display:block; height:2px; margin:6px auto 0; width:0%;
-  background:linear-gradient(90deg,transparent,rgba(255,215,0,1),transparent);
-  box-shadow:0 0 10px rgba(255,215,0,.7);
-  transition:width .22s ease;
-}
-.drawer .links a:hover{
-  transform: scale(1.04);
-  text-shadow:
-    0 0 10px rgba(255,215,0,0.85),
-    0 0 20px rgba(255,215,0,0.65);
-}
-.drawer .links a:hover::after{ width:72%; }
-
-/* ========== Animación MENÚ MÓVIL: fade-in + slide + stagger ========== */
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Estado base: oculto/ligeramente abajo */
-.drawer .links a {
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-/* Al abrir el drawer, reproducimos la animación con escalonado */
-.drawer.open .links a {
-  animation: fadeSlideIn .42s ease-out both;
-}
-
-/* Escalonado por posición */
-.drawer.open .links a:nth-child(1) { animation-delay: .02s; }
-.drawer.open .links a:nth-child(2) { animation-delay: .10s; }
-.drawer.open .links a:nth-child(3) { animation-delay: .18s; }
-.drawer.open .links a:nth-child(4) { animation-delay: .26s; }
-.drawer.open .links a:nth-child(5) { animation-delay: .34s; }
-.drawer.open .links a:nth-child(6) { animation-delay: .42s; }
-
-/* Accesibilidad: respeta usuarios con reducción de movimiento */
-@media (prefers-reduced-motion: reduce) {
-  .drawer .links a,
-  .drawer.open .links a {
-    animation: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-  }
-}
-
-/* ===== ANIMACIONES CORREGIDAS (sin duplicados) ===== */
-
-/* Animaciones de paneo horizontal */
-@keyframes pan-left {
-  0%   { transform: translateX(8%); }
-  50%  { transform: translateX(-8%); }
-  100% { transform: translateX(8%); }
-}
-
-@keyframes pan-right {
-  0%   { transform: translateX(-10%); }
-  50%  { transform: translateX(10%); }
-  100% { transform: translateX(-10%); }
-}
-
-/* "Bob + jitter": saltito vertical con un pelín de vibración */
-@keyframes bob-jitter {
-  0%   { transform: translateY(0)    rotate(0);    }
-  20%  { transform: translateY(-2px) rotate(0.2deg);  }
-  40%  { transform: translateY(1px)  rotate(-0.2deg); }
-  60%  { transform: translateY(-3px) rotate(0.1deg);  }
-  80%  { transform: translateY(2px)  rotate(-0.1deg); }
-  100% { transform: translateY(0)    rotate(0);       }
-}
-
-/* Drift horizontal R→L (va y viene para que no corte en loop) */
-@keyframes drift-rtl {
-  0%   { transform: translateX(12%); }
-  100% { transform: translateX(-12%); }
-}
-
-/* Brinco corto + ligera rotación (look orgánico) */
-@keyframes hop {
-  0%   { transform: translateY(0)    rotate(0);    }
-  25%  { transform: translateY(-4px) rotate(0.2deg);}
-  50%  { transform: translateY(0)    rotate(0);    }
-  75%  { transform: translateY(-3px) rotate(-0.2deg);}
-  100% { transform: translateY(0)    rotate(0);    }
-}
-
-/* Logo Effects */
-@keyframes logoZoomOut {
-  0%   { transform: scale(1.8); opacity: 0; }
-  40%  { opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes logoZoomIn {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-
-@keyframes heartbeat {
-  0%   { transform: scale(1); }
-  14%  { transform: scale(1.08); }
-  28%  { transform: scale(1); }
-  42%  { transform: scale(1.08); }
-  70%  { transform: scale(1); }
-  100% { transform: scale(1); }
-}
-
-@keyframes glowPulse {
-  0%   { filter: drop-shadow(0 0 0px rgba(255,215,0,0)); }
-  50%  { filter: drop-shadow(0 0 14px rgba(255,215,0,0.55)); }
-  100% { filter: drop-shadow(0 0 0px rgba(255,215,0,0)); }
-}
-
-/* Respeta usuarios con reducción de movimiento */
-@media (prefers-reduced-motion: reduce){
-  .layer, .hero-banner .layer.l8 { 
-    animation: none !important; 
-    transform: none !important; 
-  }
-}
-
-/* ===== Hero Banner con 7 capas ===== */
-.hero-banner{
-  position: relative;
-  height: 460px;        /* ajusta según tu imagen principal */
-  overflow: hidden;
-  z-index: 0;           /* detrás del nav */
-}
-
-/* Todas las capas ocupan el banner */
-.hero-banner .layer{
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: contain; /* para que se vean completas */
-  will-change: transform;
-}
-
-/* ==== Capas asignadas ==== */
-.l1{ 
-  background-image:url("img/fondo.png"); 
-  z-index:1; 
-  animation: pan-left 18s linear infinite;
-}
-
-.l2{ 
-  background-image:url("img/hombreizquierdacapa1.png"); 
-  z-index:2; 
-  animation: drift-rtl 26s linear infinite alternate;
-}
-
-.l3{ 
-  background-image:url("img/mujer-izquierda-capa2.png"); 
-  z-index:3; 
-  animation: drift-rtl 32s linear infinite alternate;
-}
-
-.l4{ 
-  background-image:url("img/mujer1derechacapa1.png"); 
-  z-index:4; 
-  animation: drift-rtl 28s linear infinite alternate-reverse;
-}
-
-.l5{ 
-  background-image:url("img/hombre1derechacapa2.png"); 
-  z-index:5; 
-  animation: drift-rtl 30s linear infinite alternate-reverse;
-}
-
-.l6{ 
-  background-image:url("img/gentecapa3izquierda.png"); 
-  z-index:6; 
-  animation: drift-rtl 22s linear infinite alternate, hop 1.5s ease-in-out infinite;
-}
-
-.l7{ 
-  background-image:url("img/gentecapa3derecha.png"); 
-  z-index:7; 
-  animation: drift-rtl 24s linear infinite alternate, hop 1.6s ease-in-out infinite;
-}
-
-.l8{ 
-  background-image:url("img/logo.png");
-  z-index:8; 
-  background-repeat:no-repeat;
-  background-position:center center;
-  background-size: clamp(160px, 26vmin, 280px) auto;
-  transform-origin:center center;
-  will-change: transform, opacity, filter;
-
-  /* Secuencia: zoom out → zoom in → heartbeat + glow */
-  animation:
-    logoZoomOut 0.9s ease-out both,
-    logoZoomIn  0.6s ease-in 0.9s both,
-    heartbeat   2.2s ease-in-out 1.5s infinite,
-    glowPulse   3.6s ease-in-out 1.5s infinite;
-}
-
-/* --- CORRECCIÓN de mezcla y solapado en el banner --- */
-.hero-banner{ 
-  background:#000;       /* base oscura para contraste */
-  isolation:isolate;     /* aísla mezclas internas */
-}
-
-/* Anula los efectos "dorados" que traía .layer del header */
-.hero-banner .layer{
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-  filter: none !important;
-}
-
-/* Header transparente arriba */
-.header{
-  background: transparent !important;
-  border-bottom-color: transparent !important;
-  transition: background .25s ease, border-color .25s ease;
-}
-
-/* (opcional) más legibilidad sobre la imagen */
-.header .menu a{ text-shadow: 0 1px 10px rgba(0,0,0,.35); }
-
-/* Oculta el "humo" cuando está transparente (si no lo quieres arriba) */
-.header::before,
-.header::after{ opacity:.0; transition: opacity .25s ease; }
-
-/* Accesibilidad */
-@media (prefers-reduced-transparency: reduce){
-  .header{ backdrop-filter:none; }
-}
-
-/* — Base: TRANSPARENTE arriba — */
-.header{
-  background: transparent !important;
-  border-bottom-color: transparent !important;
-  transition: background .25s ease, border-color .25s ease, opacity .25s ease;
-}
-.header::before,
-.header::after{ opacity: 0; }        /* sin humo arriba */
-.nav{ background: transparent !important; }  /* por si acaso */
-
-/* — Al hacer scroll: FONDO NEGRO/ETÉREO + humo dorado — */
-body.scrolled .header{
-  background: linear-gradient(180deg, rgba(0,0,0,.92), rgba(0,0,0,.70)) !important;
-  border-bottom: 1px solid rgba(255,215,0,.18) !important;
-  backdrop-filter: saturate(140%) blur(6px);
-}
-body.scrolled .header::before,
-body.scrolled .header::after{ opacity: .45; }  /* vuelve el humo */
-
-/* Header siempre fijo arriba */
-.header{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999; /* bien arriba de todo */
-}
-
-/* ===== AJUSTES ESPECÍFICOS PARA MÓVIL ===== */
-@media (max-width: 768px) {
-  /* Ajustar el hero banner para móvil */
-  .hero-banner {
-    margin-top: 0 !important;
-    height: 60vh !important;
-  }
-  
-  /* Ajustar la posición de las capas para móvil */
-  .hero-banner .layer {
-    background-position: center 30% !important;
-  }
-  
-  /* Ajustes específicos para cada capa si es necesario */
-  .hero-banner .l2 {
-    background-position: 10% 25% !important;
-  }
-  
-  .hero-banner .l3 {
-    background-position: 25% 30% !important;
-  }
-  
-  .hero-banner .l4 {
-    background-position: 75% 25% !important;
-  }
-  
-  .hero-banner .l5 {
-    background-position: 90% 30% !important;
-  }
-  
-  .hero-banner .l6,
-  .hero-banner .l7 {
-    background-position: center 35% !important;
-  }
-  
-  .hero-banner .l8 {
-    background-position: center 40% !important;
-    background-size: clamp(120px, 40vmin, 200px) auto !important;
-  }
-  
-  /* Ajustar animaciones para mejor rendimiento en móvil */
-  .hero-banner .layer {
-    animation-duration: 40s !important;
-  }
-  
-  .hero-banner .l6,
-  .hero-banner .l7 {
-    animation-duration: 30s, 2s !important;
-  }
-}
-
-/* Ajustes adicionales para pantallas muy pequeñas */
-@media (max-width: 480px) {
-  .hero-banner {
-    height: 50vh !important;
-  }
-  
-  .hero-banner .layer {
-    background-position: center 25% !important;
-  }
-  
-  .hero-banner .l8 {
-    background-size: clamp(100px, 35vmin, 180px) auto !important;
-  }
-}
-
-/* Responsivo para el hero banner */
-@media (min-width: 1200px){ .hero-banner{ height: 540px; } }
-@media (max-width: 900px){ .hero-banner{ height: 400px; } }
-@media (max-width: 600px){ .hero-banner{ height: 320px; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirippers - Efecto Parallax</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            overflow-x: hidden;
+            background: #0a1930;
+            color: white;
+        }
+        
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 100px;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        
+        .layer-back {
+            background-image: url('https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            z-index: 1;
+            transform: translateZ(-10px) scale(2);
+        }
+        
+        .layer-mid {
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            z-index: 2;
+            transform: translateZ(-5px) scale(1.5);
+        }
+        
+        .layer-front {
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            transform: translateZ(0);
+        }
+        
+        .logo {
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+        
+        .tagline span {
+            font-weight: 600;
+            color: #ffcc00;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #1a2b69;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        
+        .cta-button:hover {
+            background-color: #ffd633;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+        }
+        
+        .element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ff9900, transparent 70%);
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        
+        .element:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #3366ff, transparent 70%);
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+        
+        .element:nth-child(3) {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #ff3366, transparent 70%);
+            top: 70%;
+            left: 10%;
+            animation-delay: -10s;
+        }
+        
+        .info-section {
+            position: relative;
+            z-index: 20;
+            background: #0f1f3f;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .info-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .info-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ffcc00;
+        }
+        
+        .info-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) translateX(15px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(10px) translateX(-15px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-10px) translateX(-10px) rotate(3deg);
+            }
+        }
+        
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2.8rem;
+                letter-spacing: 2px;
+            }
+            
+            .tagline {
+                font-size: 1.3rem;
+                padding: 0 1rem;
+            }
+            
+            .layer-back {
+                transform: translateZ(-5px) scale(1.5);
+            }
+            
+            .layer-mid {
+                transform: translateZ(-2px) scale(1.2);
+            }
+            
+            .element {
+                display: none;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Efecto de reducción de movimiento para usuarios que lo prefieren */
+        @media (prefers-reduced-motion: reduce) {
+            .parallax-layer, .element {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- ===================== HEADER FIJO CON HUMO ===================== -->
-<header class="header">
-  
-  <nav class="nav">
-    <div class="brand">
-      <span class="dot" aria-hidden="true"></span>
-      <h1>strippers h y m</h1>
-    </div>
-
-    <div class="menu" id="menu">
-      <a href="#presentacion">Inicio</a>
-      <a href="#hombres">Chicos</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#mujeres">Chicas</a>
-      <a href="#videos">Videos</a>
-      <a href="#paquetes" class="cta">Paquetes</a>
-    </div>
-
-    <button class="burger" id="burger" aria-label="Abrir menú"><span></span></button>
-  </nav>
-</header>
-<section class="hero-banner" id="hero-banner" aria-hidden="true">
-  <div class="layers">
-    <span class="layer l1"></span>
-    <span class="layer l2"></span>
-    <span class="layer l3"></span>
-    <span class="layer l4"></span>
-    <span class="layer l5"></span>
-    <span class="layer l6"></span>
-    <span class="layer l7"></span>
-	<span class="layer l8"></span>
-  </div>
-</section>
-<main>
-
-  <!-- HOMBRES -->
-  <section id="hombres">
-    <div class="wrap">
-      <h3 class="section-title">Galería de Hombres</h3>
-      <div class="section-sub">Estilos y energías</div>
-      <div class="rule"></div>
-
-      <div class="grid">
-        <div class="tile"><span class="badge">Top</span><span class="caption">Performer #1</span></div>
-        <div class="tile"><span class="badge">VIP</span><span class="caption">Performer #2</span></div>
-        <div class="tile"><span class="badge">Hot</span><span class="caption">Performer #3</span></div>
-        <div class="tile"><span class="badge">Nuevo</span><span class="caption">Performer #4</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICIOS -->
-  <section id="servicios">
-    <div class="wrap">
-      <h3 class="section-title">Servicios</h3>
-      <div class="section-sub">Cómo elevamos tu evento</div>
-      <div class="rule"></div>
-
-      <div class="cards">
-        <div class="card">
-          <h4>Brief & Curaduría</h4>
-          <p>Definimos público, mood, duración y temáticas. Selección de performers y vestuario.</p>
+    <section class="hero" id="hero">
+        <div class="parallax-layer layer-back"></div>
+        <div class="parallax-layer layer-mid"></div>
+        
+        <div class="floating-elements">
+            <div class="element"></div>
+            <div class="element"></div>
+            <div class="element"></div>
         </div>
-        <div class="card">
-          <h4>Coreografía & Música</h4>
-          <p>Rutina a medida con drops clave. Playlist o DJ opcional.</p>
+        
+        <div class="parallax-layer layer-front">
+            <div class="logo">
+                <h1>Sirippers</h1>
+            </div>
+            <p class="tagline">Si no hay <span>competencia</span> no hay <span>calidad</span></p>
+            <a href="#info" class="cta-button">Descubre más</a>
         </div>
-        <div class="card">
-          <h4>Show & Hosting</h4>
-          <p>Ejecución impecable con MC, interacción segura y cierre memorable.</p>
+    </section>
+    
+    <section class="info-section" id="info">
+        <div class="info-content">
+            <h2>Nuestra Filosofía</h2>
+            <p>En Sirippers creemos que la competencia es el motor que impulsa la innovación y la excelencia. Sin desafíos que superar, no hay motivación para mejorar, innovar o refinar nuestros productos y servicios.</p>
+            <p>Por eso abrazamos la competencia, porque nos obliga a dar lo mejor de nosotros mismos cada día, asegurando que entregamos a nuestros clientes la más alta calidad en todo lo que hacemos.</p>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- MUJERES -->
-  <section id="mujeres" class="diagonal">
-    <div class="wrap">
-      <h3 class="section-title">Galería de Mujeres</h3>
-      <div class="rule"></div>
-      <div class="panel">Placeholder de carrusel/galería (reemplazar aquí)</div>
-    </div>
-  </section>
-
-  <!-- VIDEOS -->
-  <section id="videos">
-    <div class="wrap">
-      <h3 class="section-title">Galería de Videos</h3>
-      <div class="rule"></div>
-      <div class="video-grid">
-        <div class="video"><div class="play" title="Reproducir"></div></div>
-        <div class="video"><div class="play" title="Reproducir"></div></div>
-        <div class="video"><div class="play" title="Reproducir"></div></div>
-        <div class="video"><div class="play" title="Reproducir"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAQUETES -->
-  <section id="paquetes">
-    <div class="wrap">
-      <h3 class="section-title">Paquetes</h3>
-      <div class="section-sub">Elige tu nivel</div>
-      <div class="rule"></div>
-
-      <div class="pricing">
-        <div class="price">
-          <h5>Esencial</h5>
-          <div class="amount">$ $$$</div>
-          <ul>
-            <li>1 performer · 20–30 min</li>
-            <li>Vestuario temático</li>
-            <li>Playlist base</li>
-          </ul>
-        </div>
-        <div class="price" style="transform:translateY(-6px);box-shadow:0 22px 40px rgba(0,0,0,.6)">
-          <h5>Pro</h5>
-          <div class="amount">$ $$$$</div>
-          <ul>
-            <li>2 performers · 40–50 min</li>
-            <li>Coreografía + interacción</li>
-            <li>Host/MC & mini-iluminación</li>
-          </ul>
-        </div>
-        <div class="price">
-          <h5>Élite</h5>
-          <div class="amount">$ $$$$$</div>
-          <ul>
-            <li>3+ performers · 60+ min</li>
-            <li>Dirección artística completa</li>
-            <li>DJ/Host · rider técnico</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- ===================== FOOTER ===================== -->
-<footer class="footer">
-  <div class="wrap footer-grid">
-    <!-- TikTok -->
-    <a class="social" href="#" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M16 3c.6 2.3 2.2 3.9 4 4v3.2c-1.6-.1-3.1-.6-4.4-1.4v5.7c0 4.6-3.7 6.5-6.8 5.7-2.1-.5-3.8-2.3-4-4.6-.4-3.7 2.5-6.4 6.1-6.4.3 0 .7 0 1 .1V12c-.3-.1-.7-.1-1-.1-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3V3h2.1Z"/>
-      </svg>
-      <span>TikTok</span>
-    </a>
-
-
-
-    <!-- Instagram -->
-    <a class="social" href="#" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm5.25-3a1.25 1.25 0 1 1-1.25 1.25A1.25 1.25 0 0 1 17.25 6.5Z"/>
-      </svg>
-      <span>Instagram</span>
-    </a>
-
-    <!-- Facebook -->
-    <a class="social" href="#" aria-label="Facebook">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M13 22v-8h3l1-4h-4V7.5c0-1.2.6-2.5 2.6-2.5H17V2.3S15.4 2 13.9 2C10.9 2 9 3.7 9 7v3H6v4h3v8h4Z"/>
-      </svg>
-      <span>Facebook</span>
-    </a>
-  </div>
-
-  <div class="legal">
-    <div class="rule"></div>
-    <div>AGENCIA DE STRIPPERS S Y M 2025</div>
-    <div>HANT PRODUCTIONS SA DE CV 2025</div>
-  </div>
-</footer>
-
-<script>
-  // ===== Menú móvil (igual que antes) =====
-  const burger = document.getElementById('burger');
-  const drawer = document.createElement('div');
-  drawer.className = 'drawer';
-  drawer.innerHTML = `
-    <div class="links">
-      <a href="#presentacion">Inicio</a>
-      <a href="#hombres">Chicos</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#mujeres">Chicas</a>
-      <a href="#videos">Videos</a>
-      <a href="#paquetes">Paquetes</a>
-    </div>`;
-  document.body.appendChild(drawer);
-
-  burger.addEventListener('click', ()=> drawer.classList.toggle('open'));
-  drawer.querySelectorAll('a').forEach(a=> a.addEventListener('click',()=> drawer.classList.remove('open')));
-
-  // ===== Header transparente arriba / negro al scrollear =====
-  const hero = document.getElementById('hero-banner');
-
-  function setBodyScrolled(on) {
-    document.body.classList.toggle('scrolled', !!on);
-  }
-
-  function fallbackScroll() {
-    setBodyScrolled(window.scrollY > 10);
-  }
-
-  if ('IntersectionObserver' in window && hero) {
-    const obs = new IntersectionObserver(([entry])=>{
-      // Si el banner ya no intersecta (salió por arriba), activamos "scrolled"
-      setBodyScrolled(!entry.isIntersecting);
-    }, { rootMargin: '-76px 0px 0px 0px', threshold: 0.01 });
-    obs.observe(hero);
-  } else {
-    window.addEventListener('scroll', fallbackScroll, {passive:true});
-    window.addEventListener('resize', fallbackScroll, {passive:true});
-  }
-
-  // Inicializa estado al cargar (si entras con #ancla ya estás scrolleado)
-  window.addEventListener('load', ()=>{
-    if ('IntersectionObserver' in window && hero) {
-      // fuerza cálculo inicial con bounding rect
-      const rect = hero.getBoundingClientRect();
-      setBodyScrolled(rect.top <= 76 ? true : false);
-    } else {
-      fallbackScroll();
-    }
-  }, {once:true});
-</script>
-
-<script>
-/* --- HERO (trasplantado de index5_ajustado.html) --- */
-// Menú móvil
-const burger = document.getElementById('burger');
-const drawer = document.createElement('div');
-drawer.className = 'drawer';
-drawer.innerHTML = `<div class="links">
-  <a href="#presentacion">Inicio</a>
-  <a href="#hombres">Chicos</a>
-  <a href="#servicios">Servicios</a>
-  <a href="#mujeres">Chicas</a>
-  <a href="#videos">Videos</a>
-  <a href="#paquetes">Paquetes</a>
-</div>`;
-document.body.appendChild(drawer);
-burger?.addEventListener('click', ()=> drawer.classList.toggle('open'));
-drawer.querySelectorAll('a').forEach(a=> a.addEventListener('click',()=> drawer.classList.remove('open')));
-
-// Header transparente arriba → negro al scrollear
-function setBodyScrolled(on){ document.body.classList.toggle('scrolled', !!on); }
-function fallbackScroll(){ setBodyScrolled(window.scrollY > 10); }
-if ('IntersectionObserver' in window){
-  const hero = document.getElementById('hero-banner');
-  if (hero){
-    const obs = new IntersectionObserver(([entry])=> setBodyScrolled(!entry.isIntersecting), {rootMargin:'-76px 0px 0px 0px', threshold:0.01});
-    obs.observe(hero);
-  } else {
-    window.addEventListener('scroll', fallbackScroll, {passive:true});
-    window.addEventListener('resize', fallbackScroll, {passive:true});
-  }
-} else {
-  window.addEventListener('scroll', fallbackScroll, {passive:true});
-  window.addEventListener('resize', fallbackScroll, {passive:true});
-}
-window.addEventListener('load', fallbackScroll, {once:true});
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hero = document.getElementById('hero');
+            const layers = document.querySelectorAll('.parallax-layer');
+            const floatingElements = document.querySelectorAll('.element');
+            
+            // Efecto parallax al mover el ratón
+            hero.addEventListener('mousemove', function(e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                const moveX = (x - centerX) / centerX;
+                const moveY = (y - centerY) / centerY;
+                
+                layers.forEach(layer => {
+                    const depth = layer.classList.contains('layer-back') ? 15 : 
+                                 layer.classList.contains('layer-mid') ? 10 : 0;
+                    
+                    const offsetX = moveX * depth;
+                    const offsetY = moveY * depth;
+                    
+                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) ${layer.style.transform.split(' ').slice(2).join(' ')}`;
+                });
+                
+                // Efecto más pronunciado en los elementos flotantes
+                floatingElements.forEach(el => {
+                    const moveXEl = (x - centerX) / 50;
+                    const moveYEl = (y - centerY) / 50;
+                    
+                    el.style.transform = `translateX(${moveXEl}px) translateY(${moveYEl}px) ${el.style.transform.split(' ').slice(2).join(' ')}`;
+                });
+            });
+            
+            // Efecto parallax al desplazar
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                
+                layers.forEach(layer => {
+                    if (layer.classList.contains('layer-back')) {
+                        layer.style.transform = `translateY(${rate * 0.6}px) ${layer.style.transform.split(' ').slice(1).join(' ')}`;
+                    } else if (layer.classList.contains('layer-mid')) {
+                        layer.style.transform = `translateY(${rate * 0.4}px) ${layer.style.transform.split(' ').slice(1).join(' ')}`;
+                    }
+                });
+            });
+            
+            // Efecto para dispositivos táctiles
+            hero.addEventListener('touchmove', function(e) {
+                const touch = e.touches[0];
+                const x = touch.clientX;
+                const y = touch.clientY;
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                const moveX = (x - centerX) / centerX;
+                const moveY = (y - centerY) / centerY;
+                
+                layers.forEach(layer => {
+                    const depth = layer.classList.contains('layer-back') ? 10 : 
+                                 layer.classList.contains('layer-mid') ? 5 : 0;
+                    
+                    const offsetX = moveX * depth;
+                    const offsetY = moveY * depth;
+                    
+                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) ${layer.style.transform.split(' ').slice(2).join(' ')}`;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
