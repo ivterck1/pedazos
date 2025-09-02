@@ -174,7 +174,7 @@
             background-color: var(--oro);
         }
 
-        /* Hero section NOVEDOSA */
+        /* Hero section CON IMAGEN DE PRUEBA */
         .hero {
             height: 100vh;
             display: flex;
@@ -185,13 +185,14 @@
             margin-top: 70px;
         }
 
-        .hero-canvas {
+        .hero-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            object-fit: cover;
+            z-index: -2;
         }
 
         .hero-overlay {
@@ -200,7 +201,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
             z-index: -1;
         }
 
@@ -582,9 +583,11 @@
         </div>
     </header>
 
-    <!-- Sección Hero NOVEDOSA con partículas -->
+    <!-- Sección Hero CON IMAGEN DE PRUEBA -->
     <section class="hero" id="inicio">
-        <canvas class="hero-canvas" id="particleCanvas"></canvas>
+        <!-- AQUÍ VA LA IMAGEN DE FONDO DEL HERO -->
+        <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Show de bailarines" class="hero-image">
+        
         <div class="hero-overlay"></div>
         <div class="dancer-silhouettes"></div>
         
@@ -603,6 +606,7 @@
             </div>
             <div class="content-grid">
                 <div class="content-card">
+                    <!-- REEMPLAZA ESTA URL CON TU IMAGEN -->
                     <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bailarín profesional">
                     <div class="card-content">
                         <h3>Espectáculo Masculino</h3>
@@ -611,6 +615,7 @@
                     </div>
                 </div>
                 <div class="content-card">
+                    <!-- REEMPLAZA ESTA URL CON TU IMAGEN -->
                     <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Coreografía grupal">
                     <div class="card-content">
                         <h3>Coreografías Grupales</h3>
@@ -619,10 +624,49 @@
                     </div>
                 </div>
                 <div class="content-card">
+                    <!-- REEMPLAZA ESTA URL CON TU IMAGEN -->
                     <img src="https://images.unsplash.com/photo-1537365587684-f4901e4e70e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Bailarín acrobático">
                     <div class="card-content">
                         <h3>Acrobacias y Destreza</h3>
                         <p>Movimientos impresionantes que combinan baile y acrobacias para un show inolvidable.</p>
+                        <a href="#" class="card-btn">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Chicas -->
+    <section id="chicas" style="background-color: #1a1a1a;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bailarinas Chicas</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <!-- REEMPLAZA CON TU IMAGEN DE BAILARINA -->
+                    <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Bailarina profesional">
+                    <div class="card-content">
+                        <h3>Espectáculo Femenino</h3>
+                        <p>Nuestras bailarinas te cautivarán con su elegancia, estilo y talento en el escenario.</p>
+                        <a href="#" class="card-btn">Ver más</a>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <!-- REEMPLAZA CON TU IMAGEN -->
+                    <img src="https://images.unsplash.com/photo-1543946208-11d486546127?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Coreografía grupal femenina">
+                    <div class="card-content">
+                        <h3>Shows en Grupo</h3>
+                        <p>Coreografías sincronizadas que demuestran la coordinación y el talento de nuestras artistas.</p>
+                        <a href="#" class="card-btn">Ver más</a>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <!-- REEMPLAZA CON TU IMAGEN -->
+                    <img src="https://images.unsplash.com/photo-1511632765481-4a4b2b0e99de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bailarina acrobática">
+                    <div class="card-content">
+                        <h3>Acrobacias Aéreas</h3>
+                        <p>Espectaculares números que combinan baile con acrobacias aéreas para un show único.</p>
                         <a href="#" class="card-btn">Ver más</a>
                     </div>
                 </div>
@@ -682,97 +726,6 @@
             }
         });
 
-        // Sistema de partículas para el fondo del hero
-        function initParticles() {
-            const canvas = document.getElementById('particleCanvas');
-            const ctx = canvas.getContext('2d');
-            let particlesArray = [];
-            
-            // Ajustar tamaño del canvas
-            function setCanvasSize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            
-            setCanvasSize();
-            window.addEventListener('resize', setCanvasSize);
-            
-            // Clase Partícula
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = Math.random() * 3 - 1.5;
-                    this.speedY = Math.random() * 3 - 1.5;
-                    this.color = `rgba(${Math.random() * 50 + 180}, ${Math.random() * 50 + 160}, ${Math.random() * 50}, ${Math.random() * 0.5 + 0.2})`;
-                }
-                
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    
-                    if (this.size > 0.2) this.size -= 0.01;
-                    
-                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-                }
-                
-                draw() {
-                    ctx.fillStyle = this.color;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-            
-            // Crear partículas
-            function createParticles() {
-                for (let i = 0; i < 100; i++) {
-                    particlesArray.push(new Particle());
-                }
-            }
-            
-            // Animar partículas
-            function animateParticles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                for (let i = 0; i < particlesArray.length; i++) {
-                    particlesArray[i].update();
-                    particlesArray[i].draw();
-                    
-                    // Conectar partículas cercanas
-                    for (let j = i; j < particlesArray.length; j++) {
-                        const dx = particlesArray[i].x - particlesArray[j].x;
-                        const dy = particlesArray[i].y - particlesArray[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < 100) {
-                            ctx.beginPath();
-                            ctx.strokeStyle = `rgba(255, 215, 0, ${0.1 * (1 - distance/100)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                    
-                    // Reemplazar partículas que desaparecen
-                    if (particlesArray[i].size <= 0.2) {
-                        particlesArray[i] = new Particle();
-                    }
-                }
-                
-                requestAnimationFrame(animateParticles);
-            }
-            
-            createParticles();
-            animateParticles();
-        }
-        
-        // Iniciar el sistema de partículas cuando la página cargue
-        window.addEventListener('load', initParticles);
-        
         // Efecto de revelado suave al hacer scroll
         const revealElements = document.querySelectorAll('.content-card, .section-title');
         
