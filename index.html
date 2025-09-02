@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sirippers - Efecto Parallax</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Animación de Capas Laterales</title>
     <style>
         * {
             margin: 0;
@@ -15,318 +14,306 @@
         
         body {
             overflow-x: hidden;
-            background: #0a1930;
+            background: linear-gradient(135deg, #1a2b69, #0a1930);
             color: white;
-        }
-        
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            perspective: 100px;
-        }
-        
-        .parallax-layer {
-            position: absolute;
-            width: 110%;
-            height: 110%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            transition: transform 0.1s ease-out;
-            will-change: transform;
-        }
-        
-        .layer-back {
-            background-image: url('https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            z-index: 1;
-            transform: translateZ(-10px) scale(2);
-        }
-        
-        .layer-mid {
-            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            z-index: 2;
-            transform: translateZ(-5px) scale(1.5);
-        }
-        
-        .layer-front {
-            z-index: 3;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: 2rem;
-            transform: translateZ(0);
         }
         
-        .logo {
-            margin-bottom: 2rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        .logo h1 {
-            font-size: 5rem;
-            font-weight: 800;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tagline {
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-            max-width: 800px;
-            line-height: 1.4;
-        }
-        
-        .tagline span {
-            font-weight: 600;
-            color: #ffcc00;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: #ffcc00;
-            color: #1a2b69;
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-        }
-        
-        .cta-button:hover {
-            background-color: #ffd633;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-        
-        .floating-elements {
-            position: absolute;
+        .container {
+            max-width: 1200px;
             width: 100%;
-            height: 100%;
-            z-index: 4;
-            pointer-events: none;
-        }
-        
-        .element {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: float 15s infinite ease-in-out;
-        }
-        
-        .element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, #ff9900, transparent 70%);
-            top: 20%;
-            left: 15%;
-            animation-delay: 0s;
-        }
-        
-        .element:nth-child(2) {
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, #3366ff, transparent 70%);
-            top: 60%;
-            left: 80%;
-            animation-delay: -5s;
-        }
-        
-        .element:nth-child(3) {
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle, #ff3366, transparent 70%);
-            top: 70%;
-            left: 10%;
-            animation-delay: -10s;
-        }
-        
-        .info-section {
-            position: relative;
-            z-index: 20;
-            background: #0f1f3f;
-            padding: 4rem 2rem;
             text-align: center;
+            margin-bottom: 3rem;
         }
         
-        .info-content {
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffcc00;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .animation-container {
+            position: relative;
+            height: 500px;
+            width: 100%;
             max-width: 1000px;
             margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
         
-        .info-content h2 {
+        .layer {
+            position: absolute;
+            width: 120%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            left: -10%;
+        }
+        
+        .layer-1 {
+            background: linear-gradient(45deg, #0a1930, #152a53);
+            z-index: 1;
+            animation: move-layer-1 25s infinite ease-in-out;
+        }
+        
+        .layer-2 {
+            background: radial-gradient(circle at center, transparent 30%, #1e3a8a 80%);
+            z-index: 2;
+            animation: move-layer-2 20s infinite ease-in-out;
+        }
+        
+        .layer-3 {
+            background: 
+                radial-gradient(circle at 20% 50%, #ff9900 10%, transparent 11%),
+                radial-gradient(circle at 80% 20%, #3366ff 8%, transparent 9%),
+                radial-gradient(circle at 40% 80%, #ff3366 12%, transparent 13%),
+                radial-gradient(circle at 70% 70%, #ffcc00 7%, transparent 8%);
+            z-index: 3;
+            animation: move-layer-3 15s infinite ease-in-out;
+        }
+        
+        .layer-4 {
+            background: 
+                radial-gradient(circle at 30% 30%, #ff9900 5%, transparent 6%),
+                radial-gradient(circle at 60% 60%, #3366ff 6%, transparent 7%),
+                radial-gradient(circle at 90% 40%, #ff3366 4%, transparent 5%);
+            z-index: 4;
+            animation: move-layer-4 10s infinite ease-in-out;
+        }
+        
+        .layer-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            text-align: center;
+            width: 80%;
+            background: rgba(10, 25, 48, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .layer-content h2 {
             font-size: 2.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             color: #ffcc00;
         }
         
-        .info-content p {
+        .layer-content p {
             font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
         }
         
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(-20px) translateX(15px) rotate(5deg);
-            }
-            50% {
-                transform: translateY(10px) translateX(-15px) rotate(-5deg);
-            }
-            75% {
-                transform: translateY(-10px) translateX(-10px) rotate(3deg);
-            }
+        .controls {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
         }
         
-        /* Responsive para móviles */
+        button {
+            background: #ffcc00;
+            color: #1a2b69;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background: #ffd633;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .speed-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        @keyframes move-layer-1 {
+            0%, 100% { transform: translateX(-5%); }
+            50% { transform: translateX(5%); }
+        }
+        
+        @keyframes move-layer-2 {
+            0%, 100% { transform: translateX(-8%); }
+            50% { transform: translateX(8%); }
+        }
+        
+        @keyframes move-layer-3 {
+            0%, 100% { transform: translateX(-12%); }
+            50% { transform: translateX(12%); }
+        }
+        
+        @keyframes move-layer-4 {
+            0%, 100% { transform: translateX(-15%); }
+            50% { transform: translateX(15%); }
+        }
+        
         @media (max-width: 768px) {
-            .logo h1 {
-                font-size: 2.8rem;
-                letter-spacing: 2px;
+            h1 {
+                font-size: 2.5rem;
             }
             
-            .tagline {
-                font-size: 1.3rem;
-                padding: 0 1rem;
-            }
-            
-            .layer-back {
-                transform: translateZ(-5px) scale(1.5);
-            }
-            
-            .layer-mid {
-                transform: translateZ(-2px) scale(1.2);
-            }
-            
-            .element {
-                display: none;
-            }
-            
-            .cta-button {
-                padding: 0.8rem 2rem;
+            p {
                 font-size: 1.1rem;
             }
-        }
-        
-        /* Efecto de reducción de movimiento para usuarios que lo prefieren */
-        @media (prefers-reduced-motion: reduce) {
-            .parallax-layer, .element {
-                animation: none;
-                transition: none;
+            
+            .animation-container {
+                height: 400px;
+            }
+            
+            .layer-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .layer-content p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <section class="hero" id="hero">
-        <div class="parallax-layer layer-back"></div>
-        <div class="parallax-layer layer-mid"></div>
-        
-        <div class="floating-elements">
-            <div class="element"></div>
-            <div class="element"></div>
-            <div class="element"></div>
-        </div>
-        
-        <div class="parallax-layer layer-front">
-            <div class="logo">
-                <h1>Sirippers</h1>
-            </div>
-            <p class="tagline">Si no hay <span>competencia</span> no hay <span>calidad</span></p>
-            <a href="#info" class="cta-button">Descubre más</a>
-        </div>
-    </section>
+    <div class="container">
+        <h1>Animación de Capas Laterales</h1>
+        <p>Observa cómo las diferentes capas se mueven a velocidades variables, creando un efecto de profundidad y movimiento.</p>
+    </div>
     
-    <section class="info-section" id="info">
-        <div class="info-content">
-            <h2>Nuestra Filosofía</h2>
-            <p>En Sirippers creemos que la competencia es el motor que impulsa la innovación y la excelencia. Sin desafíos que superar, no hay motivación para mejorar, innovar o refinar nuestros productos y servicios.</p>
-            <p>Por eso abrazamos la competencia, porque nos obliga a dar lo mejor de nosotros mismos cada día, asegurando que entregamos a nuestros clientes la más alta calidad en todo lo que hacemos.</p>
+    <div class="animation-container">
+        <div class="layer layer-1"></div>
+        <div class="layer layer-2"></div>
+        <div class="layer layer-3"></div>
+        <div class="layer layer-4"></div>
+        
+        <div class="layer-content">
+            <h2>Sirippers</h2>
+            <p>Si no hay competencia no hay calidad</p>
         </div>
-    </section>
+    </div>
+    
+    <div class="speed-indicators">
+        <div class="indicator">
+            <div class="color-box" style="background: #0a1930;"></div>
+            <span>Capa 1 (lenta)</span>
+        </div>
+        <div class="indicator">
+            <div class="color-box" style="background: #1e3a8a;"></div>
+            <span>Capa 2 (media)</span>
+        </div>
+        <div class="indicator">
+            <div class="color-box" style="background: #ff9900;"></div>
+            <span>Capa 3 (rápida)</span>
+        </div>
+        <div class="indicator">
+            <div class="color-box" style="background: #ff3366;"></div>
+            <span>Capa 4 (muy rápida)</span>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button id="pauseBtn">Pausar</button>
+        <button id="playBtn">Reproducir</button>
+        <button id="slowBtn">Más lento</button>
+        <button id="fastBtn">Más rápido</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const hero = document.getElementById('hero');
-            const layers = document.querySelectorAll('.parallax-layer');
-            const floatingElements = document.querySelectorAll('.element');
+            const layers = document.querySelectorAll('.layer');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const playBtn = document.getElementById('playBtn');
+            const slowBtn = document.getElementById('slowBtn');
+            const fastBtn = document.getElementById('fastBtn');
             
-            // Efecto parallax al mover el ratón
-            hero.addEventListener('mousemove', function(e) {
-                const x = e.clientX;
-                const y = e.clientY;
-                const centerX = window.innerWidth / 2;
-                const centerY = window.innerHeight / 2;
-                
-                const moveX = (x - centerX) / centerX;
-                const moveY = (y - centerY) / centerY;
-                
+            // Control de animación
+            pauseBtn.addEventListener('click', function() {
                 layers.forEach(layer => {
-                    const depth = layer.classList.contains('layer-back') ? 15 : 
-                                 layer.classList.contains('layer-mid') ? 10 : 0;
-                    
-                    const offsetX = moveX * depth;
-                    const offsetY = moveY * depth;
-                    
-                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) ${layer.style.transform.split(' ').slice(2).join(' ')}`;
-                });
-                
-                // Efecto más pronunciado en los elementos flotantes
-                floatingElements.forEach(el => {
-                    const moveXEl = (x - centerX) / 50;
-                    const moveYEl = (y - centerY) / 50;
-                    
-                    el.style.transform = `translateX(${moveXEl}px) translateY(${moveYEl}px) ${el.style.transform.split(' ').slice(2).join(' ')}`;
+                    layer.style.animationPlayState = 'paused';
                 });
             });
             
-            // Efecto parallax al desplazar
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
-                
+            playBtn.addEventListener('click', function() {
                 layers.forEach(layer => {
-                    if (layer.classList.contains('layer-back')) {
-                        layer.style.transform = `translateY(${rate * 0.6}px) ${layer.style.transform.split(' ').slice(1).join(' ')}`;
-                    } else if (layer.classList.contains('layer-mid')) {
-                        layer.style.transform = `translateY(${rate * 0.4}px) ${layer.style.transform.split(' ').slice(1).join(' ')}`;
+                    layer.style.animationPlayState = 'running';
+                });
+            });
+            
+            // Ajustar velocidad
+            slowBtn.addEventListener('click', function() {
+                layers.forEach(layer => {
+                    const currentSpeed = parseInt(getComputedStyle(layer).animationDuration);
+                    if (currentSpeed < 60) {
+                        layer.style.animationDuration = (currentSpeed + 5) + 's';
                     }
                 });
             });
             
-            // Efecto para dispositivos táctiles
-            hero.addEventListener('touchmove', function(e) {
-                const touch = e.touches[0];
-                const x = touch.clientX;
-                const y = touch.clientY;
-                const centerX = window.innerWidth / 2;
-                const centerY = window.innerHeight / 2;
-                
-                const moveX = (x - centerX) / centerX;
-                const moveY = (y - centerY) / centerY;
-                
+            fastBtn.addEventListener('click', function() {
                 layers.forEach(layer => {
-                    const depth = layer.classList.contains('layer-back') ? 10 : 
-                                 layer.classList.contains('layer-mid') ? 5 : 0;
-                    
-                    const offsetX = moveX * depth;
-                    const offsetY = moveY * depth;
-                    
-                    layer.style.transform = `translateX(${offsetX}px) translateY(${offsetY}px) ${layer.style.transform.split(' ').slice(2).join(' ')}`;
+                    const currentSpeed = parseInt(getComputedStyle(layer).animationDuration);
+                    if (currentSpeed > 5) {
+                        layer.style.animationDuration = (currentSpeed - 5) + 's';
+                    }
+                });
+            });
+            
+            // Efecto de movimiento con el ratón
+            const container = document.querySelector('.animation-container');
+            container.addEventListener('mousemove', function(e) {
+                const x = e.clientX;
+                const centerX = window.innerWidth / 2;
+                const moveX = (x - centerX) / centerX;
+                
+                layers.forEach((layer, index) => {
+                    const depth = 4 - index; // Diferente profundidad para cada capa
+                    const offsetX = moveX * depth * 5;
+                    layer.style.transform = `translateX(${offsetX}%)`;
+                });
+            });
+            
+            container.addEventListener('mouseleave', function() {
+                // Restaurar animación cuando el ratón sale
+                layers.forEach(layer => {
+                    layer.style.transform = '';
                 });
             });
         });
